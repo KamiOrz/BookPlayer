@@ -8,6 +8,7 @@
 
 import MediaPlayer
 import SwiftReorder
+import Themeable
 import UIKit
 
 // swiftlint:disable file_length
@@ -41,6 +42,8 @@ class ItemListViewController: UIViewController, ItemList, ItemListAlerts, ItemLi
         self.setupBulkControls()
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+        setUpTheming()
 
         self.tableView.register(UINib(nibName: "BookCellView", bundle: nil), forCellReuseIdentifier: "BookCellView")
         self.tableView.register(UINib(nibName: "AddCellView", bundle: nil), forCellReuseIdentifier: "AddCellView")
@@ -503,5 +506,15 @@ extension ItemListViewController: UIDocumentPickerDelegate {
         for url in urls {
             DataManager.processFile(at: url)
         }
+    }
+}
+
+extension BaseListViewController: Themeable {
+    func applyTheme(_ theme: Theme) {
+        self.view.backgroundColor = theme.backgroundColor
+        self.tableView.backgroundColor = theme.backgroundColor
+        self.tableView.separatorColor = theme.separatorColor
+        self.emptyStatePlaceholder.backgroundColor = theme.backgroundColor
+        self.emptyStatePlaceholder.tintColor = theme.tintColor
     }
 }
