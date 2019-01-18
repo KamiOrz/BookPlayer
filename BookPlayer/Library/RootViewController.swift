@@ -181,7 +181,9 @@ class RootViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension RootViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.themedStatusBarStyle = theme.statusBarStyle
+        self.themedStatusBarStyle = theme.background.isDark
+            ? .lightContent
+            : .default
         setNeedsStatusBarAppearanceUpdate()
     }
 }

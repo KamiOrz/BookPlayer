@@ -144,16 +144,16 @@ class BookCellView: UITableViewCell {
     func setPlaybackColors(_ theme: Theme) {
         switch self.playbackState {
         case .playing:
-            self.artworkButton.backgroundColor = theme.tintColor.withAlpha(newAlpha: 0.3)
-            self.titleLabel.textColor = theme.tintColor
-            self.progressView.pieColor = theme.tintColor
+            self.artworkButton.backgroundColor = theme.tertiary.withAlpha(newAlpha: 0.3)
+            self.titleLabel.textColor = theme.tertiary
+            self.progressView.pieColor = theme.tertiary
         case .paused:
-            self.artworkButton.backgroundColor = theme.tintColor.withAlpha(newAlpha: 0.3)
-            self.titleLabel.textColor = theme.tintColor
-            self.progressView.pieColor = theme.tintColor
+            self.artworkButton.backgroundColor = theme.tertiary.withAlpha(newAlpha: 0.3)
+            self.titleLabel.textColor = theme.tertiary
+            self.progressView.pieColor = theme.tertiary
         default:
             self.artworkButton.backgroundColor = UIColor.clear
-            self.titleLabel.textColor = theme.titleColor
+            self.titleLabel.textColor = theme.primary
             self.progressView.pieColor = UIColor(hex: "8F8E94")
         }
     }
@@ -174,9 +174,9 @@ extension BookCellView {
 
 extension BookCellView: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.titleLabel.textColor = theme.titleColor
-        self.subtitleLabel.textColor = theme.descriptionColor
-        self.backgroundColor = theme.cellColor
+        self.titleLabel.textColor = theme.primary
+        self.subtitleLabel.textColor = theme.secondary
+        self.backgroundColor = theme.background
         self.setPlaybackColors(theme)
     }
 }

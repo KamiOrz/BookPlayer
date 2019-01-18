@@ -24,17 +24,19 @@ class AppNavigationController: UINavigationController {
 
 extension AppNavigationController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.themedStatusBarStyle = theme.statusBarStyle
+        self.themedStatusBarStyle = theme.background.isDark
+            ? .lightContent
+            : .default
         setNeedsStatusBarAppearanceUpdate()
 
-        navigationBar.barTintColor = theme.barTintColor
-        navigationBar.tintColor = theme.tintColor
+        navigationBar.barTintColor = theme.background
+        navigationBar.tintColor = theme.tertiary
         navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: theme.titleColor
+            NSAttributedStringKey.foregroundColor: theme.primary
         ]
         if #available(iOS 11.0, *) {
             navigationBar.largeTitleTextAttributes = [
-                NSAttributedStringKey.foregroundColor: theme.titleColor
+                NSAttributedStringKey.foregroundColor: theme.primary
             ]
         }
     }

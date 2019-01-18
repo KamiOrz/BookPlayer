@@ -221,6 +221,30 @@ class DataManager {
         return library
     }
 
+    class func setupderp(_ library: Library) {
+        guard
+            library.currentTheme == nil,
+            let themesFile = Bundle.main.url(forResource: "Themes", withExtension: "json")
+        else { return }
+
+        guard let data = try? Data(contentsOf: themesFile, options: .mappedIfSafe),
+            let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves), let themeParams = jsonObject as? [[String: String]] else {
+            fatalError("Failed to initialize themes")
+            return
+        }
+
+        var themes = [Theme]()
+        for themeParam in themeParams {
+            let theme = Theme(params: themeParam, context: self.persistentContainer.viewContext)
+            themes.append(theme)
+        }
+
+        library.currentTheme = themes.first
+        library.addToAvailableThemes(NSOrderedSet(array: themes))
+
+        self.saveContext()
+    }
+
     /**
      Gets a stored book from an identifier.
      */
@@ -327,7 +351,9 @@ class DataManager {
         return Book(from: file, context: self.persistentContainer.viewContext)
     }
 
-    class func insert(_ playlist: Playlist, into library: Library) {
+    class func createTheme(from derp: String) {}
+
+    internal class func insert(_ playlist: Playlist, into library: Library) {
         library.addToItems(playlist)
         self.saveContext()
     }

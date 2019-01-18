@@ -62,8 +62,8 @@ class PlayerMetaViewController: PlayerContainerViewController {
 
 extension PlayerMetaViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.titleLabel.textColor = theme.isDark ? theme.titleColor : self.book?.artworkColors.primary
-        self.authorLabel.textColor = theme.isDark ? theme.descriptionColor : self.book?.artworkColors.secondary
-        self.chapterLabel.textColor = theme.isDark ? theme.descriptionColor : self.book?.artworkColors.tertiary
+        self.titleLabel.textColor = theme.background.isDark ? theme.primary : self.book?.artworkColors.primary
+        self.authorLabel.textColor = theme.background.isDark ? theme.secondary : self.book?.artworkColors.secondary
+        self.chapterLabel.textColor = theme.background.isDark ? theme.secondary : self.book?.artworkColors.tertiary
     }
 }

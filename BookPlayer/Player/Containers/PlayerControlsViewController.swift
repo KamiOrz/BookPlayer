@@ -302,11 +302,11 @@ extension PlayerControlsViewController: Themeable {
 
         self.progressSlider.minimumTrackTintColor = book.artworkColors.tertiary
         self.progressSlider.maximumTrackTintColor = book.artworkColors.tertiary.withAlpha(newAlpha: 0.3)
-        self.artworkControl.iconColor = theme.isDark ? theme.tintColor : book.artworkColors.tertiary
-        self.artworkControl.borderColor = theme.isDark ? theme.tintColor : book.artworkColors.tertiary
+        self.artworkControl.iconColor = theme.background.isDark ? theme.tertiary : book.artworkColors.tertiary
+        self.artworkControl.borderColor = theme.background.isDark ? theme.tertiary : book.artworkColors.tertiary
 
-        self.currentTimeLabel.textColor = theme.isDark ? theme.descriptionColor : book.artworkColors.tertiary
-        self.maxTimeButton.setTitleColor(theme.isDark ? theme.titleColor : book.artworkColors.tertiary, for: .normal)
-        self.progressButton.setTitleColor(theme.isDark ? theme.descriptionColor : book.artworkColors.primary, for: .normal)
+        self.currentTimeLabel.textColor = theme.background.isDark ? theme.secondary : book.artworkColors.tertiary
+        self.maxTimeButton.setTitleColor(theme.background.isDark ? theme.primary : book.artworkColors.tertiary, for: .normal)
+        self.progressButton.setTitleColor(theme.background.isDark ? theme.secondary : book.artworkColors.primary, for: .normal)
     }
 }

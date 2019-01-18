@@ -53,6 +53,8 @@ class LibraryViewController: ItemListViewController, UIGestureRecognizerDelegate
     func loadLibrary() {
         self.library = DataManager.getLibrary()
 
+        ThemeManager.shared.library = library
+
         self.toggleEmptyStateView()
 
         self.tableView.reloadData()

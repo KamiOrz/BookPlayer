@@ -43,18 +43,19 @@ class ThemesViewController: UITableViewController {
 
         self.selectedTheme = item
 
-        if item == "Light" {
-            themeProvider.currentTheme = .light
-        } else if item == "Sepia" {
-            themeProvider.currentTheme = .sepia
-        } else {
-            themeProvider.currentTheme = .dark
-        }
+//        if item == "Light" {
+//            themeProvider.currentTheme = .light
+//        }
+//        else if item == "Sepia" {
+//            themeProvider.currentTheme = .sepia
+//        } else {
+//            themeProvider.currentTheme = .dark
+//        }
     }
 }
 
 extension ThemesViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.view.backgroundColor = theme.backgroundColor
+        self.view.backgroundColor = theme.background
     }
 }

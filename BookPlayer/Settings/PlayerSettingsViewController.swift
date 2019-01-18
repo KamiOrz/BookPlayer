@@ -63,12 +63,12 @@ class PlayerSettingsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as? UITableViewHeaderFooterView
-        header?.textLabel?.textColor = self.themeProvider.currentTheme.sectionHeaderTextColor
+        header?.textLabel?.textColor = self.themeProvider.currentTheme.secondary
     }
 
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let footer = view as? UITableViewHeaderFooterView
-        footer?.textLabel?.textColor = self.themeProvider.currentTheme.sectionHeaderTextColor
+        footer?.textLabel?.textColor = self.themeProvider.currentTheme.secondary
     }
 
     @objc func rewindToggleDidChange() {
@@ -87,8 +87,8 @@ class PlayerSettingsViewController: UITableViewController {
 
 extension PlayerSettingsViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.tableView.backgroundColor = theme.settingsBackgroundColor
-        self.tableView.separatorColor = theme.separatorColor
+        self.tableView.backgroundColor = theme.background
+//        self.tableView.separatorColor = theme.separatorColor
         self.tableView.reloadData()
     }
 }

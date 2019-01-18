@@ -509,12 +509,12 @@ extension ItemListViewController: UIDocumentPickerDelegate {
     }
 }
 
-extension BaseListViewController: Themeable {
+extension ItemListViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        self.view.backgroundColor = theme.backgroundColor
-        self.tableView.backgroundColor = theme.backgroundColor
-        self.tableView.separatorColor = theme.separatorColor
-        self.emptyStatePlaceholder.backgroundColor = theme.backgroundColor
-        self.emptyStatePlaceholder.tintColor = theme.tintColor
+        self.view.backgroundColor = theme.background
+        self.tableView.backgroundColor = theme.background
+        self.tableView.separatorColor = theme.secondary
+        self.emptyStatePlaceholder.backgroundColor = theme.background
+        self.emptyStatePlaceholder.tintColor = theme.tertiary
     }
 }

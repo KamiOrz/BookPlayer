@@ -360,12 +360,14 @@ class PlayerViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension PlayerViewController: Themeable {
     func applyTheme(_ theme: Theme) {
-        if theme.isDark {
-            self.themedStatusBarStyle = theme.statusBarStyle
+        if theme.background.isDark {
+            self.themedStatusBarStyle = theme.background.isDark
+                ? .lightContent
+                : .default
             setNeedsStatusBarAppearanceUpdate()
-            self.view.backgroundColor = theme.backgroundColor
-            self.bottomToolbar.tintColor = theme.tintColor
-            self.closeButton.tintColor = theme.tintColor
+            self.view.backgroundColor = theme.background
+            self.bottomToolbar.tintColor = theme.tertiary
+            self.closeButton.tintColor = theme.tertiary
         } else {
             self.view.backgroundColor = self.currentBook.artworkColors.background
             self.bottomToolbar.tintColor = self.currentBook.artworkColors.secondary
