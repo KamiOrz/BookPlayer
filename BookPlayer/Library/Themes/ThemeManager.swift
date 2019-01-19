@@ -24,7 +24,7 @@ final class ThemeManager: ThemeProvider {
     }
 
     private var theme: SubscribableValue<Theme>!
-    private var availableThemes: [Theme] {
+    var availableThemes: [Theme] {
         return self.library.availableThemes?.array as? [Theme] ?? []
     }
 
@@ -35,6 +35,8 @@ final class ThemeManager: ThemeProvider {
         }
         set {
             self.setNewTheme(newValue)
+            self.library.currentTheme = newValue
+            DataManager.saveContext()
         }
     }
 
@@ -55,10 +57,10 @@ final class ThemeManager: ThemeProvider {
         self.theme.subscribe(object, using: handler)
     }
 
-//    func loadLocalThemes() {
-//        let themeBundle = Bundle.main.url(forResource: "Themes", withExtension: "bundle")!
-//        let herp = try? FileManager.default.contentsOfDirectory(at: themeBundle, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants)
-//    }
+    //    func loadLocalThemes() {
+    //        let themeBundle = Bundle.main.url(forResource: "Themes", withExtension: "bundle")!
+    //        let herp = try? FileManager.default.contentsOfDirectory(at: themeBundle, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants)
+    //    }
 }
 
 extension Themeable where Self: AnyObject {

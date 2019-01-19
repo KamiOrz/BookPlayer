@@ -221,25 +221,50 @@ class DataManager {
         return library
     }
 
-    class func setupderp(_ library: Library) {
+    class func setupDefaultThemes(in library: Library) {
+        guard let themes = library.availableThemes?.array, themes.isEmpty else { return }
+
+        let light = Theme(params: ["title": "Light",
+                                   "primary": "37454E",
+                                   "secondary": "8F8F94",
+                                   "tertiary": "3488D1",
+                                   "background": "FFFFFF"],
+                          context: self.persistentContainer.viewContext)
+
+        let dark = Theme(params: ["title": "Dark",
+                                  "primary": "FFFFFF",
+                                  "secondary": "8F8F94",
+                                  "tertiary": "FFFFFF",
+                                  "background": "000000"],
+                         context: self.persistentContainer.viewContext)
+
+        library.currentTheme = light
+        library.addToAvailableThemes(NSOrderedSet(array: [light, dark]))
+
+        self.saveContext()
+    }
+
+    class func reloadThemes(in library: Library) {
         guard
-            library.currentTheme == nil,
-            let themesFile = Bundle.main.url(forResource: "Themes", withExtension: "json")
+            let themesFile = Bundle.main.url(forResource: "Themes", withExtension: "json"),
+            let data = try? Data(contentsOf: themesFile, options: .mappedIfSafe),
+            let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves),
+            let themeParams = jsonObject as? [[String: String]]
         else { return }
 
-        guard let data = try? Data(contentsOf: themesFile, options: .mappedIfSafe),
-            let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves), let themeParams = jsonObject as? [[String: String]] else {
-            fatalError("Failed to initialize themes")
-            return
-        }
+        let availableThemes = library.availableThemes?.array as? [Theme] ?? []
 
         var themes = [Theme]()
         for themeParam in themeParams {
             let theme = Theme(params: themeParam, context: self.persistentContainer.viewContext)
+
+            if availableThemes.contains(where: { $0.title == theme.title }) {
+                continue
+            }
+
             themes.append(theme)
         }
 
-        library.currentTheme = themes.first
         library.addToAvailableThemes(NSOrderedSet(array: themes))
 
         self.saveContext()

@@ -249,7 +249,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupThemes() {
         let library = DataManager.getLibrary()
-        DataManager.setupderp(library)
+        DataManager.setupDefaultThemes(in: library)
         ThemeManager.shared.library = library
     }
 }

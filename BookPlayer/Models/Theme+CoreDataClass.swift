@@ -40,6 +40,7 @@ public class Theme: NSManagedObject {
         self.primaryHex = params["primary"]
         self.secondaryHex = params["secondary"]
         self.tertiaryHex = params["tertiary"]
+        self.title = params["title"]
         self.displayOnDark = false
     }
 

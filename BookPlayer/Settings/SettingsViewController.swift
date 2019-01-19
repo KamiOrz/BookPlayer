@@ -16,6 +16,7 @@ import UIKit
 class SettingsViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var autoplayLibrarySwitch: UISwitch!
     @IBOutlet weak var disableAutolockSwitch: UISwitch!
+    @IBOutlet weak var themeLabel: UILabel!
 
     let supportSection: Int = 4
     let githubLinkPath = IndexPath(row: 0, section: 4)
@@ -169,8 +170,9 @@ extension SettingsViewController: INUIAddVoiceShortcutViewControllerDelegate {
 
 extension SettingsViewController: Themeable {
     func applyTheme(_ theme: Theme) {
+        self.themeLabel.text = theme.title
         self.tableView.backgroundColor = theme.background
-//        self.tableView.separatorColor = theme.separatorColor
+        self.tableView.separatorColor = theme.secondary.withAlpha(newAlpha: 0.5)
         self.tableView.reloadData()
     }
 }

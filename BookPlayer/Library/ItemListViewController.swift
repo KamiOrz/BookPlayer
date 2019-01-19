@@ -513,7 +513,7 @@ extension ItemListViewController: Themeable {
     func applyTheme(_ theme: Theme) {
         self.view.backgroundColor = theme.background
         self.tableView.backgroundColor = theme.background
-        self.tableView.separatorColor = theme.secondary
+        self.tableView.separatorColor = theme.secondary.withAlpha(newAlpha: 0.5)
         self.emptyStatePlaceholder.backgroundColor = theme.background
         self.emptyStatePlaceholder.tintColor = theme.tertiary
     }
